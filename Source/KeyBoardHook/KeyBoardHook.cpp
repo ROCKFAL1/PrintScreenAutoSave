@@ -1,8 +1,8 @@
 #include "KeyBoardHook.hpp"
 
-HHOOK           _hook;
-KBDLLHOOKSTRUCT _kbHookStruct;
-void            (*_callbackFn)(int);
+HHOOK					 _hook;
+KBDLLHOOKSTRUCT			 _kbHookStruct;
+std::function<void(int)> _callbackFn;
 
 LRESULT CALLBACK KeyboardHookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 {
@@ -20,7 +20,7 @@ LRESULT CALLBACK KeyboardHookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 	return CallNextHookEx(_hook, nCode, wParam, lParam);
 }
 
-void HookKeyboard(void (*callbackFn)(int))
+void HookKeyboard(std::function<void(int)> callbackFn)
 {
 	_callbackFn = callbackFn;
 

@@ -1,6 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <Windows.h>
 
-
-void HookKeyboard(void (*callbackFn)(int));
+void HookKeyboard(std::function<void(int)> callbackFn);
